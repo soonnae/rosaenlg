@@ -23,8 +23,10 @@
   window.addEventListener('load', function jumpOnLoad (e) {
     var hash, target
     if ((hash = window.location.hash) && (target = document.getElementById(hash.slice(1)))) {
-      jumpToAnchor.bind(target)()
-      setTimeout(jumpToAnchor.bind(target), 0)
+      if (article.contains(target)) { // 추가된 안전 검사
+        jumpToAnchor.bind(target)()
+        setTimeout(jumpToAnchor.bind(target), 0)
+      }
     }
     window.removeEventListener('load', jumpOnLoad)
   })
