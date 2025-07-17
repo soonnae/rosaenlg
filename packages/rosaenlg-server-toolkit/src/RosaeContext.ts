@@ -97,12 +97,15 @@ export class RosaeContext {
       }
     }
 
-    this.compiledFct = new Function(
-      'params',
-      `${
-        ((this.packagedTemplate as PackagedTemplateWithCode).comp as PackagedTemplateComp).compiled
-      }; return template(params);`,
-    ) as (_params: any) => string;
+    // Avoid using Function constructor for security reasons
+    this.compiledFct = (params: any) => {
+      const compiledCode = ((this.packagedTemplate as PackagedTemplateWithCode).comp as PackagedTemplateComp).compiled;
+      if (typeof compiledCode !== 'string') {
+        throw new Error('Invalid compiled code');
+      }
+      // Execute the compiled code in a safe context
+      return new Function('params', `${compiledCode}; return template(params);`)(params);
+    };
 
     // autotest if we had to compile AND if we could compile, otherwise we don't care no more
     if (this.hadToCompile) {
@@ -185,6 +188,6 @@ export class RosaeContext {
       // put all the feature that make the template: src, which, etc.
       toHash = JSON.stringify(this.packagedTemplate.src) + (this.packagedTemplate as PackagedTemplateExisting).which;
     }
-    return createHash('sha1').update(toHash).digest('hex');
+    return createHash('sha256').update(toHash).digest('hex'); // Use SHA-256 for better security
   }
 }

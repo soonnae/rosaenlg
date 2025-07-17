@@ -37,8 +37,8 @@ describe('s3', function () {
     const s3endpoint = `http://${hostname}:${s3port}`;
 
     const s3client = new aws.S3({
-      accessKeyId: 'S3RVER',
-      secretAccessKey: 'S3RVER',
+      accessKeyId: process.env.S3_ACCESS_KEY_ID || 'S3RVER',
+      secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || 'S3RVER',
       s3ForcePathStyle: true,
       endpoint: s3endpoint,
     });
@@ -62,8 +62,8 @@ describe('s3', function () {
                 userIdHeader: 'MyAuthHeader',
                 s3conf: {
                   bucket: bucketName,
-                  accessKeyId: 'S3RVER',
-                  secretAccessKey: 'S3RVER',
+                  accessKeyId: process.env.S3_ACCESS_KEY_ID || 'S3RVER',
+                  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || 'S3RVER',
                   endpoint: s3endpoint,
                 },
               }),
@@ -227,8 +227,8 @@ describe('s3', function () {
     const s3endpoint = `http://${hostname}:${s3port}`;
 
     const s3client = new aws.S3({
-      accessKeyId: 'S3RVER',
-      secretAccessKey: 'S3RVER',
+      accessKeyId: process.env.S3_ACCESS_KEY_ID || 'S3RVER',
+      secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || 'S3RVER',
       s3ForcePathStyle: true,
       endpoint: s3endpoint,
     });
@@ -252,8 +252,8 @@ describe('s3', function () {
                 userIdHeader: 'MyAuthHeader',
                 s3conf: {
                   bucket: bucketName,
-                  accessKeyId: 'S3RVER',
-                  secretAccessKey: 'S3RVER',
+                  accessKeyId: process.env.S3_ACCESS_KEY_ID || 'S3RVER',
+                  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || 'S3RVER',
                   endpoint: s3endpoint,
                 },
                 behavior: { lazyStartup: true },
@@ -451,8 +451,8 @@ describe('s3', function () {
     const s3endpoint = `http://${hostname}:${s3port}`;
 
     const s3client = new aws.S3({
-      accessKeyId: 'S3RVER',
-      secretAccessKey: 'S3RVER',
+      accessKeyId: process.env.S3_ACCESS_KEY_ID || 'S3RVER',
+      secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || 'S3RVER',
       s3ForcePathStyle: true,
       endpoint: s3endpoint,
     });
@@ -509,8 +509,8 @@ describe('s3', function () {
                             userIdHeader: 'MyAuthHeader',
                             s3conf: {
                               bucket: bucketName,
-                              accessKeyId: 'S3RVER',
-                              secretAccessKey: 'S3RVER',
+                              accessKeyId: process.env.S3_ACCESS_KEY_ID || 'S3RVER',
+                              secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || 'S3RVER',
                               endpoint: s3endpoint,
                             },
                           }),

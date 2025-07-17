@@ -53,7 +53,7 @@ describe('auth after', function () {
             .handler({
               type: 'TOKEN',
               authorizationToken:
-                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+                process.env.TEST_JWT_TOKEN_NO_KID || 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
             })
             .then((result) => {
               console.log(result);
@@ -69,7 +69,7 @@ describe('auth after', function () {
             .handler({
               type: 'TOKEN',
               authorizationToken:
-                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImFhYWEifQ.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.zzIISZq0N_qDhXg80yQzY9b_NeZM00UJp-U55XRzZME',
+                process.env.TEST_JWT_TOKEN_RANDOM_KID || 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImFhYWEifQ.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.zzIISZq0N_qDhXg80yQzY9b_NeZM00UJp-U55XRzZME',
             })
             .then((result) => {
               // console.log(result);

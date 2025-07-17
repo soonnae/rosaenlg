@@ -450,7 +450,7 @@ export default class TemplatesController {
       }
 
       // key is based solely on the template src part; it does not contain any pre compiled code
-      const templateCalculatedId = createHash('sha1').update(JSON.stringify(templateWithData.src)).digest('hex');
+      const templateCalculatedId = createHash('sha256').update(JSON.stringify(templateWithData.src)).digest('hex');
 
       const alreadyHere = this.rosaeContextsManager.isInCache(user, templateCalculatedId);
       if (!alreadyHere) {
@@ -471,7 +471,7 @@ export default class TemplatesController {
             true,
           );
         } catch (e) {
-          response.status(400).send(`error creating template: ${(e as Error).message}`);
+          response.status(400).send(`error creating template: ${escapeHtml((e as Error).message)}`);
           winston.info({
             user: user,
             action: 'directRender',
@@ -504,7 +504,7 @@ export default class TemplatesController {
           message: `rendered ${templateCalculatedId}, ${status}`,
         });
       } catch (e) {
-        response.status(400).send(`rendering error: ${(e as Error).toString()}`);
+        response.status(400).send(`rendering error: ${escapeHtml((e as Error).toString())}`);
         winston.info({
           user: user,
           action: 'directRender',
@@ -568,7 +568,7 @@ export default class TemplatesController {
               message: `done`,
             });
           } catch (e) {
-            response.status(400).send(`rendering error: ${(e as Error).toString()}`);
+            response.status(400).send(`rendering error: ${escapeHtml((e as Error).toString())}`);
             winston.info({
               user: user,
               templateId: templateId,
@@ -582,4 +582,13 @@ export default class TemplatesController {
       });
     });
   };
+}
+
+function escapeHtml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }

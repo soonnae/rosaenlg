@@ -15,6 +15,7 @@ import winston = require('winston');
 import jwt = require('express-jwt');
 import jwks = require('jwks-rsa');
 import yn from 'yn';
+import helmet from 'helmet'; // Helmet 미들웨어 추가
 
 winston.configure({
   transports: [
@@ -65,6 +66,9 @@ export class App {
 
     // cors
     this.app.use(cors());
+
+    // helmet
+    this.app.use(helmet()); // Helmet 미들웨어 사용하여 X-Powered-By 헤더 비활성화
 
     // swagger
     const openApiDocumentation = JSON.parse(
