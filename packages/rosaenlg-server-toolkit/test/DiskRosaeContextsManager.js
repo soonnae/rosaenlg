@@ -223,7 +223,7 @@ describe('DiskRosaeContextsManager', function () {
           data = data.replace('|', '|#[XX');
           const hackedData = JSON.parse(data);
 
-          const theSha1 = crypto.createHash('sha1').update(JSON.stringify(hackedData.src)).digest('hex');
+          const theSha1 = crypto.createHash('sha256').update(JSON.stringify(hackedData.src)).digest('hex');
 
           fs.writeFile(`${testFolder}/test#basic_a.json`, JSON.stringify(hackedData), 'utf8', () => {
             cmFakeComp.getFromCacheOrLoad('test', 'basic_a', theSha1, (err, cacheValue) => {

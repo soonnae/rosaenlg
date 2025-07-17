@@ -7,6 +7,7 @@
 import { createInterface, ReadLine } from 'readline';
 import * as fs from 'fs';
 import { AAnAsObj } from '../index';
+import * as path from 'path';
 
 const toAdd = ['armlet'];
 
@@ -23,7 +24,7 @@ export function processEnglishAAn(inputFolder: string, outputFile: string, cb: (
     const promises: Promise<void>[] = [];
     for (const file of files) {
       const promise = new Promise<void>((resolve, reject) => {
-        const inputFile = inputFolder + '/' + file;
+        const inputFile = path.join(inputFolder, file); // Use path.join to prevent path traversal
 
         let count = 0;
         console.log(`start reading file: ${inputFile}...`);

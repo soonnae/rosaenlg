@@ -383,7 +383,7 @@ exports.compile = function (str, options) {
     }
   }
 
-  str = String(str);
+  str = escapeHtml(String(str)); // 수정된 부분
 
   if (options.yseop) {
     options.compileDebug = false;
