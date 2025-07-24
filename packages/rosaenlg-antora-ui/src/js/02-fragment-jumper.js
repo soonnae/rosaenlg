@@ -14,7 +14,9 @@
 
   function jumpToAnchor (e) {
     if (e) {
-      window.location.hash = '#' + this.id
+      // Sanitize the id before using it
+      var sanitizedId = this.id.replace(/[^a-zA-Z0-9-_]/g, '');
+      window.location.hash = '#' + sanitizedId
       e.preventDefault()
     }
     window.scrollTo(0, computePosition(this, 0) - toolbar.getBoundingClientRect().bottom)
